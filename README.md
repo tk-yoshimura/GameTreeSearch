@@ -11,7 +11,7 @@
 - This library does not change the environment at all.
 
 ## Licence
-[MIT](https://github.com/tk-yoshimura/GameTreeSearch/blob/master/LICENSE)
+[MIT](https://github.com/tk-yoshimura/GameTreeSearch/blob/main/LICENSE)
 
 ## Author
 
