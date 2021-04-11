@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GameTreeSearch {
+﻿namespace GameTreeSearch {
 
     /// <summary>完全探索法</summary>
     /// <typeparam name="StateType">盤面状態クラス</typeparam>
@@ -16,7 +14,7 @@ namespace GameTreeSearch {
                 return pass_decision;
             }
 
-            double completesearch_method(GameNode<StateType, DecisionType> node, bool is_player, double alpha, double beta) {
+            static double completesearch_method(GameNode<StateType, DecisionType> node, bool is_player, double alpha, double beta) {
                 if (node.IsEndNode) {
                     return node.Evaluation;
                 }
@@ -25,7 +23,7 @@ namespace GameTreeSearch {
                     GameNode<StateType, DecisionType> max_node = null;
                     double max_ev = double.NegativeInfinity;
 
-                    foreach (var child_node in node.ChildNodes()) {
+                    foreach (GameNode<StateType, DecisionType> child_node in node.ChildNodes()) {
                         double ev = completesearch_method(child_node, !is_player, alpha, beta);
 
                         if (max_ev < ev) {
@@ -58,7 +56,7 @@ namespace GameTreeSearch {
                     GameNode<StateType, DecisionType> min_node = null;
                     double min_ev = double.PositiveInfinity;
 
-                    foreach (var child_node in node.ChildNodes()) {
+                    foreach (GameNode<StateType, DecisionType> child_node in node.ChildNodes()) {
                         double ev = completesearch_method(child_node, !is_player, alpha, beta);
 
                         if (min_ev > ev) {
@@ -90,7 +88,7 @@ namespace GameTreeSearch {
                 }
             }
 
-            var root_node = new GameNode<StateType, DecisionType>(root_state, new DecisionType(), null);
+            GameNode<StateType, DecisionType> root_node = new(root_state, new DecisionType(), null);
 
             completesearch_method(root_node, true, double.NegativeInfinity, double.PositiveInfinity);
 

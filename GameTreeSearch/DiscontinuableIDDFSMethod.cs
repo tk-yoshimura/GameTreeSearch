@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GameTreeSearch {
+﻿namespace GameTreeSearch {
 
     /// <summary>探索打ち切り可能な反復深化探索法</summary>
     /// <typeparam name="StateType">盤面状態クラス</typeparam>
@@ -28,13 +26,13 @@ namespace GameTreeSearch {
                     node.ExpandChildNodes();
                 }
                 else {
-                    foreach (var child_node in node.ChildNodeList) {
+                    foreach (GameNode<StateType, DecisionType> child_node in node.ChildNodeList) {
                         child_node.IsEvaluated = false;
                     }
                 }
 
                 if (is_player) {
-                    foreach (var child_node in node.ChildNodeList) {
+                    foreach (GameNode<StateType, DecisionType> child_node in node.ChildNodeList) {
                         double ev = iddfs_method(child_node, depth + 1, limit_depth, !is_player, alpha, beta);
 
                         if (alpha < ev) {
@@ -57,7 +55,7 @@ namespace GameTreeSearch {
                     return alpha;
                 }
                 else {
-                    foreach (var child_node in node.ChildNodeList) {
+                    foreach (GameNode<StateType, DecisionType> child_node in node.ChildNodeList) {
                         double ev = iddfs_method(child_node, depth + 1, limit_depth, !is_player, alpha, beta);
 
                         if (beta > ev) {
@@ -81,7 +79,7 @@ namespace GameTreeSearch {
                 }
             }
 
-            var root_node = new GameNode<StateType, DecisionType>(root_state, new DecisionType(), null);
+            GameNode<StateType, DecisionType> root_node = new(root_state, new DecisionType(), null);
 
             iddfs_method(root_node, 0, 1, true, double.NegativeInfinity, double.PositiveInfinity);
 

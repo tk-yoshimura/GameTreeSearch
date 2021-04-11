@@ -22,8 +22,8 @@ namespace GameTreeSearch {
 
         /// <summary>子ノードをコレクションとして返す</summary>
         public IEnumerable<GameNode<StateType, DecisionType>> ChildNodes() {
-            foreach(var decision in State.NextDecisions()) {
-                var child_node = new GameNode<StateType, DecisionType>((StateType)State.NextState(decision), decision, this);
+            foreach(DecisionType decision in State.NextDecisions()) {
+                GameNode<StateType, DecisionType> child_node = new((StateType)State.NextState(decision), decision, this);
 
                 ChildNodeList.Add(child_node);
 
@@ -33,8 +33,8 @@ namespace GameTreeSearch {
 
         /// <summary>子ノードを展開</summary>
         public void ExpandChildNodes() {
-            foreach(var decision in State.NextDecisions()) {
-                var child_node = new GameNode<StateType, DecisionType>((StateType)State.NextState(decision), decision, this);
+            foreach(DecisionType decision in State.NextDecisions()) {
+                GameNode<StateType, DecisionType> child_node = new((StateType)State.NextState(decision), decision, this);
                 ChildNodeList.Add(child_node);
             }
         }
